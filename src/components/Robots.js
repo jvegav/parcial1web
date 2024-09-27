@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap'
 
-function Robots() {
+function Robots({ handleDetail }) {
 
     const [robots, setRobots] = useState([]);
     useEffect(() => {
@@ -22,8 +22,7 @@ function Robots() {
 
     return (
         <div className="container">
-            <h2 className="mt-2">Listado de mascotas</h2>
-            <hr></hr>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -35,7 +34,7 @@ function Robots() {
                 </thead>
                 <tbody>
                     {robots.map((robot) => (
-                        <tr key={robot.id}>
+                        <tr key={robot.id} onClick={() => handleDetail(robot)} style={{ cursor: 'pointer' }}>
                             <td>{robot.id}</td> {/* Muestra el ID de la mascota */}
                             <td>{robot.nombre}</td>
                             <td>{robot.modelo}</td>

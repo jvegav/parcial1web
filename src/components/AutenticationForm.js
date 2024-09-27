@@ -36,10 +36,9 @@ function AutenticationForm({ handleSubmit }) {
             });
 
             if (response.status === 200) {
-                const data = await response.json();
-                handleSubmit(); // Puedes llamar tu función de manejo de éxito aquí
-                setLoginError(''); // Resetea el mensaje de error en caso de éxito
-                alert(data.message); // Muestra el mensaje de éxito recibido
+                handleSubmit();
+                setLoginError('');
+
             } else {
                 setLoginError('Error de autenticación. Revise sus credenciales');
             }
