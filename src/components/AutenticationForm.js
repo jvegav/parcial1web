@@ -2,9 +2,14 @@ import Form from 'react-bootstrap/Form'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button'
 import './AutenticationForm.css'
+import { Container } from 'react-bootstrap';
 
 function AutenticationForm({ handleSubmit }) {
     const [formValues, setFormValues] = useState({ nombre: "", password: "" });
+
+
+    const [loginError, setLoginError] = useState('');
+
 
     const handleNombreChange = (e) => {
         setFormValues({ ...formValues, nombre: e.target.value });
@@ -14,67 +19,68 @@ function AutenticationForm({ handleSubmit }) {
     };
 
 
-    const [validationStates, setValidationStates] = useState({ nombre: false, password: false });
 
-    function verifyStates() {
-        let isValid = true;
+    const clickSubmit = async () => {
+        // Si las credenciales son válidas, hace la petición POST
 
-        // Validación del campo nombre
-        if (formValues.nombre !== 'Josue') {
-            setValidationStates((prev) => ({ ...prev, nombre: true }));
-            isValid = false;
-        } else {
-            setValidationStates((prev) => ({ ...prev, nombre: false }));
+        try {
+            const response = await fetch('http://localhost:3001/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    login: formValues.nombre,
+                    password: formValues.password,
+                }),
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                handleSubmit(); // Puedes llamar tu función de manejo de éxito aquí
+                setLoginError(''); // Resetea el mensaje de error en caso de éxito
+                alert(data.message); // Muestra el mensaje de éxito recibido
+            } else {
+                setLoginError('Error de autenticación. Revise sus credenciales');
+            }
+        } catch (error) {
+            setLoginError('Error de autenticación. Revise sus credenciales');
         }
 
-        // Validación del campo contraseña
-        if (formValues.password !== '123') {
-            setValidationStates((prev) => ({ ...prev, password: true }));
-            isValid = false;
-        } else {
-            setValidationStates((prev) => ({ ...prev, password: false }));
-        }
-
-        return isValid;
-    }
-
-    const clickSubmit = () => {
-        if (verifyStates()) {
-            handleSubmit();
-        }
     };
 
     const clickCancelar = () => {
         setFormValues({ nombre: '', password: '' });
-        setValidationStates({ nombre: false, password: false });
+        setLoginError('');
     };
 
 
 
     return (
         <>
-            <h3>Inicio De Sesion</h3>
+            <h3 className='titulo-inicio'>Inicio De Sesion</h3>
             <Form className='form'>
                 <Form.Group className="mb-6" controlId="formBasicEmail">
-                    <Form.Label> Nombre de Usuario</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={handleNombreChange} value={formValues.nombre} />
-                    {validationStates.email && <Form.Text className="text-danger">Email is invalid.</Form.Text>}
+                    <Form.Label className='label'> Nombre de Usuario</Form.Label>
+                    <Form.Control type="text" placeholder="Username" onChange={handleNombreChange} value={formValues.nombre} style={{ backgroundColor: 'rgb(216, 216, 216)', borderRadius: '0px' }} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={formValues.password} />
+                <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
+                    <Form.Label className='label'>Contraseña</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={formValues.password} style={{ backgroundColor: 'rgb(216, 216, 216)', borderRadius: '0px' }} />
                 </Form.Group>
 
 
+                <Container className='container-buttons'>
+                    <Button className='submit' variant="primary" onClick={clickSubmit} style={{ backgroundColor: 'blue', borderColor: 'blue', borderRadius: '0px', width: '190px', color: 'white', fontWeight: 'bold' }}>
+                        Ingresar
+                    </Button>
+                    <Button className='cancelar' onClick={clickCancelar} style={{ backgroundColor: 'red', borderColor: 'red', borderRadius: '0px', marginLeft: '20px', width: '190px', color: 'black', fontWeight: 'bold' }}>
+                        Cancelar
+                    </Button>
 
-                <Button variant="primary" onClick={clickSubmit}>
-                    Submit
-                </Button>
-                <Button className='cancelar' onClick={clickCancelar}>
-                    Cancelar
-                </Button>
-                {validationStates.nombre ? <h3>Error de autenticación. Revise sus credenciales</h3> : validationStates.password ? <h3>Error de autenticación. Revise sus credenciales</h3> : <></>}
+                    {loginError && <h3 className='loginError'>{loginError}</h3>}
+                </Container>
             </Form>
         </>
     );

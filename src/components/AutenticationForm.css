@@ -1,16 +1,42 @@
 .form{
-    width: 500px;
+    width: 450px;
     justify-content: center;
     margin: auto;
     gap: 20px;
+    text-align: left;
+}
+
+.group{
+    margin-top: 10px;
 }
 .cancelar {
-    background-color: #dc3545; /* Rojo bootstrap */
-    border-color: #dc3545; /* Borde rojo */
-    color: white; /* Texto blanco */
+    background-color: #dc3545;
+    border-color: #dc3545; 
+    color: black; 
+    color: rgb(216, 216, 216)
   }
 
 
-h3{
-    color: white;
+.titulo-inicio{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.label{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.container-buttons{
+    text-align: center;
+    gap: 10px;
+}
+
+.loginError{
+    text-align: left;
+    margin-top: 10px;
+    color: red;
+    font-size: 18px;
 }
