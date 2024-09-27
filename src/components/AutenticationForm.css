@@ -2,4 +2,15 @@
     width: 500px;
     justify-content: center;
     margin: auto;
+    gap: 20px;
+}
+.cancelar {
+    background-color: #dc3545; /* Rojo bootstrap */
+    border-color: #dc3545; /* Borde rojo */
+    color: white; /* Texto blanco */
+  }
+
+
+h3{
+    color: white;
 }

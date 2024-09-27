@@ -71,7 +71,7 @@ function AutenticationForm({ handleSubmit }) {
                 <Button variant="primary" onClick={clickSubmit}>
                     Submit
                 </Button>
-                <Button variant="secondary" onClick={clickCancelar}>
+                <Button className='cancelar' onClick={clickCancelar}>
                     Cancelar
                 </Button>
                 {validationStates.nombre ? <h3>Error de autenticación. Revise sus credenciales</h3> : validationStates.password ? <h3>Error de autenticación. Revise sus credenciales</h3> : <></>}
