@@ -1,28 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import AutenticationForm from './components/AutenticationForm';
+import NavBar from './components/NavBar';
+import { useState } from 'react';
+import Robots from './components/Robots';
 
 
 function App() {
+  const [showRobots, setShowRobots] = useState(false);
+
+
+  const handleSubmit = () => {
+    setShowRobots(true);
+
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar></NavBar>
+      {showRobots ? <Robots /> : <AutenticationForm handleSubmit={handleSubmit} />}
     </div>
+
   );
 }
 
