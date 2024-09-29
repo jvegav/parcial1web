@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import './NavBar.css'
 import { FormattedMessage } from "react-intl";
-import { Form } from "react-bootstrap";
 
 function NavBar() {
     return (
