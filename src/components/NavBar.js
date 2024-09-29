@@ -1,6 +1,8 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import './NavBar.css'
+import { FormattedMessage } from "react-intl";
+import { Form } from "react-bootstrap";
 
 function NavBar() {
     return (
@@ -8,7 +10,7 @@ function NavBar() {
             <Navbar className="navbar1">
                 <Container className="container">
                     <Container className="container-texto">
-                        <h1 className="titulo">Adopta un Robot con Robot Lovers!</h1>
+                        <h1 className="titulo"><FormattedMessage id="Adopt a Robot with Robot Lovers" /></h1>
                     </Container>
 
                     <img

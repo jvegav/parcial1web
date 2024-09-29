@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap'
+import { FormattedMessage } from 'react-intl';
 
 function Robots({ handleDetail }) {
 
@@ -26,10 +27,10 @@ function Robots({ handleDetail }) {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>ID</th> {/* Puedes agregar más columnas si es necesario */}
-                        <th>Nombre</th>
-                        <th>Modelo</th>
-                        <th>Empresa Fabricante</th>
+                        <th>ID</th>
+                        <th><FormattedMessage id="Name" /></th>
+                        <th><FormattedMessage id="Model" /></th>
+                        <th><FormattedMessage id="Manufacturing Company" /></th>
                     </tr>
                 </thead>
                 <tbody>
